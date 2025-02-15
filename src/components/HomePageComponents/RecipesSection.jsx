@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import mockRecipes from "../data/mockRecipes";
-import RecipeCard from "./RecipeCard";
+import mockRecipes from "../../data/mockRecipes";
+import RecipeCard from "../RecipeCard";
 
 const RecipesSectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   width: 100%;
 `;
 const GridWrapper = styled.div`
   overflow: hidden;
   max-height: ${(props) => (props.isCollapsed ? "0px" : "auto")};
-  transition: max-height 0.50s ease;
+  transition: max-height 0.5s ease;
 `;
 const Grid = styled.div`
   display: flex;
@@ -49,12 +49,12 @@ const LoadMoreWrapper = styled.div`
   width: 100%;
   margin-top: 10px;
   @media (max-width: 768px) {
-    justify-content: center; 
+    justify-content: center;
     margin: 0;
   }
 `;
 const LoadMore = styled.button`
-  color: #2B3A39;
+  color: #2b3a39;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -65,18 +65,18 @@ const LoadMore = styled.button`
   margin-top: 40px;
   &:hover {
     border: none;
-    color: #535D45;
+    color: #535d45;
   }
   &:focus {
     outline: none;
   }
   &:active {
     border: none;
-    color: #535D45;
+    color: #535d45;
   }
-    @media (max-width: 768px) {
-    font-size: 20px; 
-    width: 100%
+  @media (max-width: 768px) {
+    font-size: 20px;
+    width: 100%;
   }
 `;
 
@@ -127,28 +127,26 @@ const RecipesSection = () => {
 
   return (
     <>
-    <RecipesSectionWrapper>
-      <PopularRecipes>Найпопулярніші рецепти:</PopularRecipes>
-      <GridWrapper isCollapsed={isCollapsed}>
-      <Grid>
-        {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </Grid>
-      </GridWrapper>
-      <LoadMoreWrapper>
-        {loadCount < 3 && recipes.length < mockRecipes.length ? (
-          <LoadMore onClick={handleLoadMore}>Показати ще рецепти</LoadMore>
-        ) : (
-          <LoadMore onClick={handleShowAll}>Показати більше</LoadMore>
-        )}
-        {loadCount > 0 && (
-          <LoadMore onClick={handleCollapse}>
-            Згорнути все
-          </LoadMore>
-        )}
-      </LoadMoreWrapper>
-    </RecipesSectionWrapper>
+      <RecipesSectionWrapper>
+        <PopularRecipes>Найпопулярніші рецепти:</PopularRecipes>
+        <GridWrapper isCollapsed={isCollapsed}>
+          <Grid>
+            {recipes.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))}
+          </Grid>
+        </GridWrapper>
+        <LoadMoreWrapper>
+          {loadCount < 3 && recipes.length < mockRecipes.length ? (
+            <LoadMore onClick={handleLoadMore}>Показати ще рецепти</LoadMore>
+          ) : (
+            <LoadMore onClick={handleShowAll}>Показати більше</LoadMore>
+          )}
+          {loadCount > 0 && (
+            <LoadMore onClick={handleCollapse}>Згорнути все</LoadMore>
+          )}
+        </LoadMoreWrapper>
+      </RecipesSectionWrapper>
     </>
   );
 };

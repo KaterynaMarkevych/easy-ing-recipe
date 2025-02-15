@@ -1,40 +1,40 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import 'primeicons/primeicons.css';
+import "primeicons/primeicons.css";
 import logo from "../assets/logo.svg";
-import MobileLogInForm from './MobileLogInForm';
-import RegistrationForm from './RegistrationForm';
-import { useNavigate } from 'react-router-dom';
+import MobileLogInForm from "../features/auth/MobileLogInForm";
+import RegistrationForm from "../features/auth/RegistrationForm";
+import { useNavigate } from "react-router-dom";
 
 const HeaderWrapper = styled.div`
   display: flex;
   text-align: center;
 `;
 const HeaderContainer = styled.header`
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    padding: 30px;
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
-    background: #8CAABE;
-    height: ${props => (props.scrolled ? "74px" : "148px")};
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    z-index: 3;
-     @media (max-width: 768px) {
-     width: 100%;
-     height: 160px;
-     }
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  padding: 30px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: #8caabe;
+  height: ${(props) => (props.scrolled ? "74px" : "148px")};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 3;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 160px;
+  }
 `;
 const Logo = styled.img`
   width: 124px;
   height: 84px;
   position: fixed;
   left: 74px;
-  top: ${props => (props.scrolled ? "24px" : "54px")};
+  top: ${(props) => (props.scrolled ? "24px" : "54px")};
   @media (max-width: 768px) {
     position: relative;
     top: -20px;
@@ -46,25 +46,25 @@ const SearchField = styled.input`
   height: 40px;
   border-radius: 30px;
   border: 1px solid #000;
-  background: #F7FBFC;
-  position:fixed;
-  top:30px;
-  left:368px;
-  padding: 0px 40px 0px 30px;  
-   &::placeholder {
+  background: #f7fbfc;
+  position: fixed;
+  top: 30px;
+  left: 368px;
+  padding: 0px 40px 0px 30px;
+  &::placeholder {
     color: #000;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-  } 
-    &:focus {
+  }
+  &:focus {
     outline: none;
     border-color: #000;
-    color: #000; 
+    color: #000;
   }
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 270px;
     margin-top: 90px;
     left: 13px;
@@ -73,27 +73,27 @@ const SearchField = styled.input`
 const SearchIcon = styled.i`
   position: absolute;
   top: 42px;
-  left: 1040px; 
+  left: 1040px;
   color: #000;
-  font-size: 18px; 
+  font-size: 18px;
   @media (max-width: 768px) {
-  left: 320px;
-  top: 130px;
+    left: 320px;
+    top: 130px;
   }
 `;
 const Navigation = styled.nav`
-    display: flex; 
-    position: fixed;
-    left: 268px;
-    top: 114px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  position: fixed;
+  left: 268px;
+  top: 114px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media (max-width: 768px) {
-    display: ${props => (props.showMenu ? 'flex' : 'none')};
+    display: ${(props) => (props.showMenu ? "flex" : "none")};
     flex-direction: column;
     align-items: left;
-    background: #F7FBFC;
+    background: #f7fbfc;
     width: 100%;
     position: fixed;
     top: 120px;
@@ -105,7 +105,7 @@ const Navigation = styled.nav`
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
-  display: ${props => (props.scrolled ? "none" : "flex")};
+  display: ${(props) => (props.scrolled ? "none" : "flex")};
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
@@ -121,15 +121,16 @@ const ListIteam = styled.li`
 `;
 const Link = styled.a`
   color: #000;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 15px;
   font-style: normal;
   text-decoration: none;
   &:hover {
-    color: #000; 
+    color: #000;
   }
-  &:visited, &:active {
-    color: #000; 
+  &:visited,
+  &:active {
+    color: #000;
   }
 `;
 const LogInButton = styled.button`
@@ -137,24 +138,24 @@ const LogInButton = styled.button`
   height: 46px;
   border-radius: 15px;
   border: 1px solid #000;
-  background: #D6E6F2;
+  background: #d6e6f2;
   position: absolute;
   top: 30px;
   left: 1200px;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   &:hover {
-    background: #B9D7EA;
+    background: #b9d7ea;
     border: 1px solid #000;
   }
   &:focus {
     outline: none;
   }
   &:active {
-    border: none; 
+    border: none;
   }
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     top: 30px;
     left: 330px;
   }
@@ -164,26 +165,26 @@ const AddRecipeButton = styled.button`
   height: 46px;
   border-radius: 15px;
   border: 1px solid #000;
-  background: #D6E6F2;
+  background: #d6e6f2;
   position: fixed;
   top: 30px;
   left: 1342px;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   &:hover {
-    background: #B9D7EA;
+    background: #b9d7ea;
     border: 1px solid #000;
   }
   &:focus {
     outline: none;
   }
   &:active {
-    border: none; 
+    border: none;
   }
-    @media (max-width: 768px){
+  @media (max-width: 768px) {
     display: none;
-    }
+  }
 `;
 const BurgerMenu = styled.div`
   display: none;
@@ -209,7 +210,7 @@ const CloseIcon = styled.i`
   }
 `;
 const Overlay = styled.div`
- display: ${props => (props.show ? 'block' : 'none')};
+  display: ${(props) => (props.show ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
@@ -220,7 +221,7 @@ const Overlay = styled.div`
   z-index: 1;
 `;
 const LoginForm = styled.div`
-  display: ${props => (props.show ? 'flex' : 'none')};
+  display: ${(props) => (props.show ? "flex" : "none")};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -228,17 +229,17 @@ const LoginForm = styled.div`
   width: 690px;
   height: 458px;
   padding: 20px;
-  background: #D6E6F2;
+  background: #d6e6f2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   z-index: 8;
   flex-direction: column;
   align-items: center;
   @media (max-width: 768px) {
-  display: none;
+    display: none;
   }
 `;
 const LogInFormHeader = styled.h2`
-  color: #2B3A39;
+  color: #2b3a39;
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
@@ -249,44 +250,44 @@ const LogInInput = styled.input`
   width: 344px;
   height: 46px;
   flex-shrink: 0;
-  border: 1px solid #A6A4A4;
-  background: #F7FBFC;
-  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #a6a4a4;
+  background: #f7fbfc;
+  font-family: "Montserrat", sans-serif;
   font-size: 24px;
   font-weight: 400;
   line-height: 20px;
   align-items: left;
-  padding-left: 60px; 
+  padding-left: 60px;
   &:focus {
     outline: none;
-    border-color: #A6A4A4;
+    border-color: #a6a4a4;
   }
 `;
 const LogInIcon = styled.i`
   position: absolute;
   left: 23px;
   font-size: 18px;
-  color: #A6A4A4;
+  color: #a6a4a4;
 `;
 const LogInFormButton = styled.button`
   width: 154px;
   height: 54px;
   border-radius: 14px;
   border: 1px solid #000;
-  background: #B9D7EA;
+  background: #b9d7ea;
   font-size: 24px;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   &:hover {
-    background: #B9D7EA;
+    background: #b9d7ea;
     border: 1px solid #000;
   }
   &:focus {
     outline: none;
   }
   &:active {
-    border: none; 
+    border: none;
   }
 `;
 const ForgetPasswordButton = styled.button`
@@ -301,14 +302,14 @@ const ForgetPasswordButton = styled.button`
   font-style: normal;
   font-weight: 300;
   line-height: 20px;
-   &:hover {
+  &:hover {
     border: none;
   }
   &:focus {
     outline: none;
   }
   &:active {
-    border: none; 
+    border: none;
   }
 `;
 const RegistrationButton = styled.button`
@@ -323,7 +324,7 @@ const RegistrationButton = styled.button`
   font-style: normal;
   font-weight: 300;
   line-height: 20px;
-  text-color: #2B3A39;
+  text-color: #2b3a39;
   &:hover {
     border: none;
   }
@@ -331,7 +332,7 @@ const RegistrationButton = styled.button`
     outline: none;
   }
   &:active {
-    border: none; 
+    border: none;
   }
 `;
 const LogInInputContainer = styled.div`
@@ -345,7 +346,7 @@ const BackIcon = styled.i`
   top: 34px;
   left: 44px;
   font-size: 24px;
-  color: #A6A4A4;
+  color: #a6a4a4;
   cursor: pointer;
 `;
 const CloseFormIcon = styled.i`
@@ -353,7 +354,7 @@ const CloseFormIcon = styled.i`
   top: 38px;
   right: 50px;
   font-size: 24px;
-  color: #A6A4A4;
+  color: #a6a4a4;
   cursor: pointer;
 `;
 const OverlayForForm = styled(Overlay)``;
@@ -362,38 +363,49 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [showRegistrationForm, setShowRegistrationForm] = useState(false); 
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 50); // встановлюємо значення true, якщо скрол більше 50px
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
-    }, []);
-    
-    const navigate = useNavigate();
-    const handleAddRecipe = () => {  
-      navigate('/add-recipe'); // Перехід на сторінку додавання рецепта
-    };
-    return (
-      <>
+  }, []);
+
+  const navigate = useNavigate();
+  const handleAddRecipe = () => {
+    navigate("/add-recipe"); // Перехід на сторінку додавання рецепта
+  };
+  return (
+    <>
       <HeaderWrapper>
         <HeaderContainer scrolled={scrolled}>
-        <Logo src={logo} alt="EasyIngrecipes" onClick={() => window.location.href = '/'}  scrolled={scrolled}/>
-        <SearchField placeholder='"борошно, яйця" або "шарлотка"' />
-        <SearchIcon className="pi pi-search" />
-        <BurgerMenu onClick={() => setMenuOpen(!menuOpen)} className="pi pi-bars" />
+          <Logo
+            src={logo}
+            alt="EasyIngrecipes"
+            onClick={() => (window.location.href = "/")}
+            scrolled={scrolled}
+          />
+          <SearchField placeholder='"борошно, яйця" або "шарлотка"' />
+          <SearchIcon className="pi pi-search" />
+          <BurgerMenu
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="pi pi-bars"
+          />
 
           <Navigation showMenu={menuOpen} scrolled={scrolled}>
-          <CloseIcon onClick={() => setMenuOpen(false)} className="pi pi-times" />
+            <CloseIcon
+              onClick={() => setMenuOpen(false)}
+              className="pi pi-times"
+            />
             <List scrolled={scrolled}>
               <ListIteam>
                 <Link href="/national_cuisine">Національна кухня</Link>
@@ -408,22 +420,36 @@ const Header = () => {
                 <Link href="/profile">Профіль</Link>
               </ListIteam>
               <ListIteam>
-                <Link  href="/#about-us">Про нас</Link>
+                <Link href="/#about-us">Про нас</Link>
               </ListIteam>
             </List>
           </Navigation>
 
-          <LogInButton onClick={()=>setShowLoginForm(true)}>Увійти</LogInButton>
-          <AddRecipeButton onClick={handleAddRecipe}>Додати рецепт</AddRecipeButton>
+          <LogInButton onClick={() => setShowLoginForm(true)}>
+            Увійти
+          </LogInButton>
+          <AddRecipeButton onClick={handleAddRecipe}>
+            Додати рецепт
+          </AddRecipeButton>
         </HeaderContainer>
-        
-        {showLoginForm && (
-          isMobile ? (
-            <MobileLogInForm show={showLoginForm} onClose={() => setShowLoginForm(false)} />
+
+        {showLoginForm &&
+          (isMobile ? (
+            <MobileLogInForm
+              show={showLoginForm}
+              onClose={() => setShowLoginForm(false)}
+            />
           ) : (
+            //винести в auth
             <LoginForm show={showLoginForm}>
-              <BackIcon className='pi pi-arrow-left' onClick={() => setShowLoginForm(false)}></BackIcon>
-              <CloseFormIcon className='pi pi-times' onClick={() => setShowLoginForm(false)}></CloseFormIcon>
+              <BackIcon
+                className="pi pi-arrow-left"
+                onClick={() => setShowLoginForm(false)}
+              ></BackIcon>
+              <CloseFormIcon
+                className="pi pi-times"
+                onClick={() => setShowLoginForm(false)}
+              ></CloseFormIcon>
               <LogInFormHeader>Увійти</LogInFormHeader>
               <LogInInputContainer>
                 <LogInIcon className="pi pi-envelope" />
@@ -435,17 +461,27 @@ const Header = () => {
               </LogInInputContainer>
               <LogInFormButton>Увійти</LogInFormButton>
               <ForgetPasswordButton>Забули пароль?</ForgetPasswordButton>
-              <RegistrationButton onClick={() => setShowRegistrationForm(true)}>Зареєструватися</RegistrationButton>
+              <RegistrationButton onClick={() => setShowRegistrationForm(true)}>
+                Зареєструватися
+              </RegistrationButton>
             </LoginForm>
-          )
-        )}
-        <RegistrationForm show={showRegistrationForm} onClose={() => setShowRegistrationForm(false)} />
+          ))}
+        <RegistrationForm
+          show={showRegistrationForm}
+          onClose={() => setShowRegistrationForm(false)}
+        />
 
         <Overlay show={menuOpen} onClick={() => setMenuOpen(false)} />
-        <OverlayForForm show={showLoginForm || showRegistrationForm} onClick={() => {setShowLoginForm(false);setShowRegistrationForm(false);}} />
+        <OverlayForForm
+          show={showLoginForm || showRegistrationForm}
+          onClick={() => {
+            setShowLoginForm(false);
+            setShowRegistrationForm(false);
+          }}
+        />
       </HeaderWrapper>
     </>
-    );
-  }
-  
-  export default Header
+  );
+};
+
+export default Header;
